@@ -21,10 +21,13 @@ This blog explores a **modular solution**, including **pseudocode**, theoretical
 You're given a **list of red tile coordinates** on a 2D grid. The goals are:
 
 * **Part 1:** Identify the largest rectangle using any two red tiles as opposite corners.
+    
 * **Part 2:** Only consider rectangles where all interior tiles are **red or green**. Green tiles are:
-
-  * Tiles connecting consecutive red tiles (horizontal or vertical line)
-  * All tiles inside the polygon formed by the red-green loop
+    
+    * Tiles connecting consecutive red tiles (horizontal or vertical line)
+        
+    * All tiles inside the polygon formed by the red-green loop
+        
 
 This creates a **geometry problem** on a discrete grid with constraints.
 
@@ -33,29 +36,39 @@ This creates a **geometry problem** on a discrete grid with constraints.
 ## Theoretical Insights
 
 1. **Grid-based rectangle calculation:**
-
-   * Rectangle area = `(width * height)`
-   * Width and height are calculated **inclusively**.
-   * Any two red tiles define a candidate rectangle.
-
+    
+    * Rectangle area = `(width * height)`
+        
+    * Width and height are calculated **inclusively**.
+        
+    * Any two red tiles define a candidate rectangle.
+        
 2. **Polygon theory for Part 2:**
-
-   * The ordered red tiles form a **closed loop**.
-   * Interior + edges of the polygon define the **green tiles**.
-   * Valid rectangles must **lie completely inside** this polygon.
-
+    
+    * The ordered red tiles form a **closed loop**.
+        
+    * Interior + edges of the polygon define the **green tiles**.
+        
+    * Valid rectangles must **lie completely inside** this polygon.
+        
 3. **Efficiency considerations:**
-
-   * Check all pairs of red tiles → `O(n^2)` combinations.
-   * For Part 2, polygon containment check reduces the need to enumerate all green tiles individually.
-   * Using `shapely.prepared.prep` optimizes repeated containment checks.
-
+    
+    * Check all pairs of red tiles → `O(n^2)` combinations.
+        
+    * For Part 2, polygon containment check reduces the need to enumerate all green tiles individually.
+        
+    * Using `shapely.prepared.prep` optimizes repeated containment checks.
+        
 4. **Modular approach:**
-
-   * `parse_points()` → reads and formats the input
-   * `rectangle_area()` → computes inclusive area between two points
-   * `part1()` → checks all red-red rectangles
-   * `part2()` → checks red-red rectangles that lie inside red-green polygon
+    
+    * `parse_points()` → reads and formats the input
+        
+    * `rectangle_area()` → computes inclusive area between two points
+        
+    * `part1()` → checks all red-red rectangles
+        
+    * `part2()` → checks red-red rectangles that lie inside red-green polygon
+        
 
 ---
 
@@ -114,9 +127,13 @@ FUNCTION part2(points):
 ## Implementation Insights
 
 * **Polygon containment:** Instead of manually marking every green tile, the polygon approach captures both boundary and interior in a single structure.
+    
 * **Shapely optimization:** `prep(polygon)` allows fast repeated containment checks, crucial for large inputs.
+    
 * **Inclusive counting:** Ensure width and height include both endpoints, matching AoC's definition.
+    
 * **Scalability:** Modular design allows easy adaptation for larger grids or different tile rules.
+    
 
 ---
 
@@ -130,21 +147,10 @@ print("Part 2:", part2(points))
 
 **Example Output:**
 
-```
+```plaintext
 Part 1: 50
 Part 2: 24
 ```
-
----
-
-## Why This Solution is SEO-Friendly & Viral
-
-* Covers both **theory and practical code**.
-* Includes **step-by-step pseudocode** for beginners and advanced users.
-* Highlights Python + Shapely usage, popular among AoC participants.
-* Clear explanation of **geometry and grid-based reasoning**.
-* Modular and scalable, making it a reference for other AoC challenges.
-* Ready for sharing on **blogs, LinkedIn, GitHub, or Dev.to**.
 
 ---
 
@@ -153,6 +159,8 @@ Part 2: 24
 If you liked this breakdown, check out more of my work:
 
 * **LinkedIn**: [https://linkedin.com/in/raksha-pahariya-409842227](https://linkedin.com/in/raksha-pahariya-409842227)
+    
 * **GitHub**: [https://github.com/RP2025](https://github.com/RP2025)
+    
 
 I post daily breakdowns, clean coding approaches, Advent of Code solutions, and tutorials for Python, grids, and algorithmic challenges.
